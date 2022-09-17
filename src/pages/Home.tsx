@@ -22,9 +22,9 @@ export function Home() {
                 <Box w='100%' h='80%' bg='#FFF' marginTop={8} borderRadius='xl' overflow='auto'>
                     <Box  padding={6} bg='#1f1b3d' display='flex' flexWrap='wrap' gap={6}>
                        {data?.assets.map(asset => (
-                        <Skeleton className='flex-none' key={asset.id} isLoaded={!loading}>
+       
                         <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '100%'}} w={{sm: '350px', md: 290}} h={400} src={asset.url}/>
-                        </Skeleton>
+           
                        ))}
                     </Box>
                 </Box>
