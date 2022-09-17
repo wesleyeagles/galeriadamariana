@@ -1,0 +1,6 @@
+query GetImages {
+  assets {
+    id
+    url
+  }
+}
