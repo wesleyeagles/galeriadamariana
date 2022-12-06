@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@graphql-codegen/cli": "^2.6.2",
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@graphql-codegen/cli": "^2.6.2",
     "apollo-link-error": "^1.1.13",
     "codegen": "^0.1.0",
     "framer-motion": "^7.3.5",
@@ -22,7 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "swiper": "^8.4.5"
   },
   "devDependencies": {
     "@graphql-codegen/typescript": "^2.5.1",
