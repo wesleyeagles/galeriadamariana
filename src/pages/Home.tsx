@@ -2,88 +2,60 @@ import { Box, Container, Heading, Image, Skeleton } from '@chakra-ui/react'
 import { useGetImagesQuery } from '../graphql/generated'
 
 import '../main.css'
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
+
 
 
 export function Home() {
 
     const { data, loading, error } = useGetImagesQuery()
 
-    if (!data && loading) {
-
+    console.log(data)
         return (
-            <Box bg='#0a0a23' w='100%' h='100vh'>
+            <Box bg='#0a0a23' w='100%' h={{sm: "100%", md: '100vh'}} overflow='hidden'>
                 <Container maxW={{lg: '5xl', '2xl': '7xl'}} h='100%'>
                     <Heading color='#FFF' paddingTop={6}>
                         Galeria de fotos da Mariana
                     </Heading>
-                    <Box w='100%' h='80%' bg='#FFF' marginTop={8} borderRadius='xl' overflow='auto'>
-                        <Box  padding={6} bg='#1f1b3d' display='flex' flexWrap='wrap' gap={6}>
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                            <Skeleton isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src=''/>
-                            </Skeleton>
-
-                        </Box>
-                    </Box>
-                </Container>
-            </Box>
-        )
-    }
-         {
-        return (
-            <Box bg='#0a0a23' w='100%' h='100vh'>
-                <Container maxW={{lg: '5xl', '2xl': '7xl'}} h='100%'>
-                    <Heading color='#FFF' paddingTop={6}>
-                        Galeria de fotos da Mariana
-                    </Heading>
-                    <Box w='100%' h='80%' bg='#FFF' marginTop={8} borderRadius='xl' overflow='auto'>
-                        <Box  padding={6} bg='#1f1b3d' display='flex' flexWrap='wrap' gap={6}>
-                           {data?.assets.map(asset => (
-                            <Skeleton key={asset.id} isLoaded={!loading}>
-                            <Image className='flex-none' borderRadius={10} minW={{sm: '350px', md: '290px'}} w={{sm: '350px', md: 290}} h={400} src={asset.url}/>
-                            </Skeleton>
-                           ))}
-                        </Box>
-                    </Box>
+                    <Box w="100%" h="100%">
+                    <Swiper
+        breakpoints={{
+            680: {
+                slidesPerView: 3
+            }
+        }}
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        initialSlide={1}
+        navigation
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {data?.assets.map((asset) => {
+            return <SwiperSlide>
+                <Image w='100%' h="100%" src={asset.url} />
+                </SwiperSlide>
+        })}
+      </Swiper>
+      </Box>
                 </Container>
             </Box>
         )
@@ -91,4 +63,3 @@ export function Home() {
         
     }
     
-}
